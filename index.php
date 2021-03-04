@@ -8,7 +8,7 @@
  * This is the main page for the website.
  */
 
-require_once "header.php";
+require_once "presentation/views/_header.php";
 ?>
 
 
@@ -19,13 +19,13 @@ require_once "header.php";
     <?php else : ?>
     <h3 class="text-center my-4">You are not yet logged in!</h3>
     <div class="text-center">
-        <a href="login.php" class="btn btn-info my-2" role="button" style="width: 200px;">Login</a>
+        <a href="presentation/views/login.php" class="btn btn-info my-2" role="button" style="width: 200px;">Login</a>
     </div>
     <div class="text-center">
-        <a href="register.php" class="btn btn-info my-2" role="button" style="width: 200px;">Register</a>
+        <a href="presentation/views/register.php" class="btn btn-info my-2" role="button" style="width: 200px;">Register</a>
     </div>
     <div class="text-center">
-        <a href="loginRegisterTest.php" class="btn btn-info my-2" role="button" style="width: 200px;">Login/Register Dual Page</a>
+        <a href="presentation/views/loginRegisterTest.php" class="btn btn-info my-2" role="button" style="width: 200px;">Login/Register Dual Page</a>
     </div>
     <?php endif; ?>
 </div>

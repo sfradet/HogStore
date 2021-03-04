@@ -9,5 +9,27 @@
  */
 
 spl_autoload_register(function($class){
-    require_once $class . ".php";
+
+    $lastDirectories = substr(getcwd(), strlen(__DIR__));
+
+    $numberOfLastDirectories = substr_count($lastDirectories, '\\');
+
+    $directories = ['businessService', 'businessService/models', 'database', 'presentation', 'presentation/handlers', 'presentation/views'];
+
+    foreach ($directories as $dir) {
+        $currentDirectory = $dir;
+        for ($x = 0; $x < $numberOfLastDirectories; $x++)
+        {
+            $currentDirectory = "../" . $currentDirectory;
+        }
+        $classFile = $currentDirectory . '/' . $class . '.php';
+
+        if (is_readable($classFile))
+        {
+            if (require $dir . '/' . $class . '.php')
+            {
+                break;
+            }
+        }
+    }
 });

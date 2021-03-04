@@ -8,8 +8,8 @@
  * This file handles login requests to the website.
  */
 
-require_once "header.php";
-require_once "Autoloader.php";
+require_once "../views/_header.php";
+require_once "../../Autoloader.php";
 
 // Get post data
 $username = $_POST['Username'];
@@ -26,11 +26,11 @@ if ($loggedIn)
 {
     $_SESSION['principal'] = true;
     $_SESSION['username'] = $username;
-    header("Location: index.php");
+    header("Location: ../../index.php");
 }
 else {
     $_SESSION['principal'] = false;
-    header("Location: loginFail.php");
+    header("Location: ../views/loginFail.php");
 }
 
 

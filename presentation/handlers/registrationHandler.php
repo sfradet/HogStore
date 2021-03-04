@@ -7,45 +7,47 @@
  * 2/28/2021
  * This file handles the process of registering a user after form submit..
  */
-require_once "header.php";
-require_once "Autoloader.php";
+require_once "../views/_header.php";
+require_once "../../Autoloader.php";
 
 // Has password
 $password = password_hash(trim($_POST['Password']), PASSWORD_DEFAULT);
 
+$newUser = new User($_POST['Firstname'], $_POST['Lastname'], $_POST['Username'], $_POST['Email'], $password);
+
 // Create RegistrationService instance
-$registrationService = new RegistrationService($_POST['Firstname'], $_POST['Lastname'], $_POST['Username'], $_POST['Email'], $password);
+$registrationService = new RegistrationService();
 
 // Check if username or email are already registered
-$checkUsername = $registrationService->checkUsername();
-$checkEmail = $registrationService->checkEmail();
+$checkUsername = $registrationService->checkUsername($newUser->getUsername());
+$checkEmail = $registrationService->checkEmail($newUser->getEmail());
 
 // If either username or email are used, return fail. If neither is used, register user and set session variable.
 if ($checkUsername)
 {
     $_SESSION['principal'] = false;
     $_SESSION['error_msg'] = "That username is already taken";
-    header("Location: registrationFail.php");
+    header("Location: ../views/registrationFail.php");
 } elseif ($checkEmail){
     $_SESSION['principal'] = false;
     $_SESSION['error_msg'] = "That email is already registered";
-    header("Location: registrationFail.php");
+    header("Location: ../views/registrationFail.php");
 } else {
     // Attempt to add user
-    $loggedIn = $registrationService->addUser();
+    $loggedIn = $registrationService->addUser($newUser);
 
     if ($loggedIn)
     {
         // Save success to Session
         $_SESSION['principal'] = true;
         $_SESSION['username'] = $_POST['Username'];
-        header("Location: index.php");
+        header("Location: ../../index.php");
 
     }
     else {
         // Display error page.
         $_SESSION['principal'] = false;
-        header("Location: loginFail.php");
+        header("Location: ../views/loginFail.php");
     }
 }
 

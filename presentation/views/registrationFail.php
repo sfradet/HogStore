@@ -7,7 +7,7 @@
  * 2/28/2021
  * This page returns registration failure messages.
  */
-require_once "header.php";
+require_once "_header.php";
 
 ?>
 

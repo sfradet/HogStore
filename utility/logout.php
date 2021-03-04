@@ -9,4 +9,4 @@
  */
 session_start(); // Start session
 session_destroy(); // Destroy session information
-header('Location: index.php'); // Redirect to login.php page
+header('Location: /HogStore/index.php'); // Redirect to login.php page

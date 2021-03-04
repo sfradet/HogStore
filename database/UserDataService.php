@@ -93,7 +93,7 @@ class UserDataService
     }
 
     // Add user to database
-    function registerUser($firstname, $lastname, $username, $email, $password)
+    function registerUser($newUser)
     {
         $db = new Database();
 
@@ -102,6 +102,12 @@ class UserDataService
         $connection = $db->getConnection();
 
         $stmt = $connection->prepare($sql_query);
+
+        $firstname = $newUser->getUsername();
+        $lastname = $newUser->getLastname();
+        $email = $newUser->getEmail();
+        $password = $newUser->getPassword();
+        $username = $newUser->getUsername();
 
         $stmt->bind_param("sssss", $firstname, $lastname, $email, $password, $username);
 

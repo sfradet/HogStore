@@ -7,14 +7,14 @@
  * 2/28/2021
  * This page is a test page for a split login/register view.
  */
-require_once "header.php";
+require_once "_header.php";
 ?>
 
 <div class="container">
     <div class="row justify-content-around">
         <div class="col-5 border border-info rounded p-s5 my-5 align-self-center">
             <h3 class="text-center my-5">Login</h3>
-            <form action="loginHandler.php" method="post">
+            <form action="../handlers/loginHandler.php" method="post">
                 <div class="form-row my-3">
                     <div class="col">
                         <input type="text" name="Username" id="" placeholder="Username" class="form-control" required>
@@ -30,7 +30,7 @@ require_once "header.php";
         </div>
         <div class="col-5 border border-info rounded p-s5 my-5">
             <h3 class="text-center my-5">Register</h3>
-            <form action="registrationHandler.php" method="post">
+            <form action="../handlers/registrationHandler.php" method="post">
                 <div class="form-row my-3">
                     <div class="col">
                         <input type="text" name="Firstname" placeholder="First Name" class="form-control" required>

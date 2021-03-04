@@ -7,7 +7,6 @@
  * 2/28/2021
  * This class for logging in users.
  */
-require_once "UserDataService.php";
 
 class SecurityService
 {

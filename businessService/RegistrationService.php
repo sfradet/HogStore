@@ -8,31 +8,16 @@
  * This class is for handling registration actions.
  */
 
+
 class RegistrationService
 {
-    // User registration variables
-    private $firstname;
-    private $lastname;
-    private $email;
-    private $username;
-    private $password;
-
-    public function __construct($firstname, $lastname, $username, $email, $password)
-    {
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->username = $username;
-        $this->password = $password;
-    }
-
     // Class for checking if a username is already registered
-    public function checkUsername()
+    public function checkUsername($userName)
     {
         $userDataService = new UserDataService();
 
         // Check for username in database
-        $usernameExists = $userDataService->findUsername($this->username);
+        $usernameExists = $userDataService->findUsername($userName);
 
         // Return results
         if ($usernameExists)
@@ -45,12 +30,12 @@ class RegistrationService
     }
 
     // Class for checking if email is already registered
-    public function checkEmail()
+    public function checkEmail($email)
     {
         $userDataService = new UserDataService();
 
         // Check for email in database
-        $emailExists = $userDataService->findEmail($this->email);
+        $emailExists = $userDataService->findEmail($email);
 
         // Return results
         if ($emailExists)
@@ -63,12 +48,12 @@ class RegistrationService
     }
 
     // Add user to database
-    public function addUser()
+    public function addUser($newUser)
     {
         $userDataService = new UserDataService();
 
         // Add user to database
-        $userAdded= $userDataService->registerUser($this->firstname, $this->lastname, $this->username, $this->email, $this->password);
+        $userAdded= $userDataService->registerUser($newUser);
 
         // Return results
         if ($userAdded)

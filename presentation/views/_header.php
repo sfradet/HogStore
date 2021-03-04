@@ -1,7 +1,7 @@
 <?php
 /*
  * Hog Store Website Version 1
- * header.php Version 1
+ * _header.php Version 1
  * Shawn Fradet
  * CST-236
  * 2/28/2021
@@ -27,7 +27,7 @@ session_start();
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a href="index.php" class="navbar-brand">
+        <a href="\HogStore\index.php" class="navbar-brand">
             Hog Store
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar">
@@ -38,14 +38,14 @@ session_start();
                 <?php
                 if ($_SESSION['principal'] == true) : ?>
                     <li class="nav-item">
-                        <a href="logout.php" class="nav-link">Logout</a>
+                        <a href="\HogStore\utility\logout.php" class="nav-link">Logout</a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a href="login.php" class="nav-link">Login</a>
+                        <a href="\HogStore\presentation\views\login.php" class="nav-link">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href="register.php" class="nav-link">Register</a>
+                        <a href="\HogStore\presentation\views\register.php" class="nav-link">Register</a>
                     </li>
                 <?php endif; ?>
             </ul>
