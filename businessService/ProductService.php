@@ -15,4 +15,11 @@ class ProductService
 
         return $productDataService->searchProductsByName($searchString, $searchColumn);
     }
+
+    public function getProductByID($id)
+    {
+        $productDataService = new ProductDataService();
+
+        return $productDataService->getProductsById($id);
+    }
 }

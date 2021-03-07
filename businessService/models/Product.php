@@ -7,9 +7,11 @@ class Product
     private $cost;
     private $description;
     private $count;
+    private $id;
 
-    public function __construct($name, $cost, $description, $count)
+    public function __construct($id, $name, $cost, $description, $count)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->cost = $cost;
         $this->description = $description;
@@ -80,7 +82,20 @@ class Product
         $this->count = $count;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
 }

@@ -20,7 +20,18 @@
         </form>
     </div>
     <div class="row">
-        <?php if ($productArray == null) { ?>
+        <?php if (!empty($_POST['id'])) { ?>
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="../images/screw.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $productArray[0]->getName() ?></h5>
+                        <p class="card-text"><?php echo $productArray[0]->getDescription() ?></p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        <?php } elseif ($productArray == null) { ?>
             <div class='col-12 text-center mb-3'>
                 <h3 class='text-center'>No Results Found</h3>
             </div>
@@ -35,13 +46,17 @@
                                 <p class="card-text"><?php echo $productArray[$x]->getDescription() ?></p>
                             </div>
                             <div class="card-footer text-center">
-                                <a href="#" class="btn btn-sm btn-info">Details</a>
+                                <form class="form-inline justify-content-center" action="../handlers/productHandler.php"
+                                      method="post">
+                                    <input type="hidden" name="id" value="<?php echo $productArray[$x]->getId() ?>">
+                                    <input class="btn btn-sm btn-info" type="submit" value="Details">
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php }
-        } ?>
+            <?php } ?>
+        <?php } ?>
     </div>
     <div class="row mb-3">
         <div class="col-4 offset-4 d-flex justify-content-center" id="pagination-container"></div>
