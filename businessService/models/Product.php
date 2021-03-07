@@ -7,15 +7,17 @@ class Product
     private $cost;
     private $description;
     private $count;
+    private $imageFileName;
     private $id;
 
-    public function __construct($id, $name, $cost, $description, $count)
+    public function __construct($id, $name, $cost, $description, $count, $imageFileName)
     {
         $this->id = $id;
         $this->name = $name;
         $this->cost = $cost;
         $this->description = $description;
         $this->count = $count;
+        $this->imageFileName = $imageFileName;
     }
 
     /**
@@ -96,6 +98,22 @@ class Product
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFileName()
+    {
+        return $this->imageFileName;
+    }
+
+    /**
+     * @param mixed $imageFileName
+     */
+    public function setImageFileName($imageFileName)
+    {
+        $this->imageFileName = $imageFileName;
     }
 
 }

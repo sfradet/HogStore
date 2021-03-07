@@ -1,7 +1,7 @@
 <?php
 /*
  * Hog Store Website Version 1
- * login.php Version 1
+ * _login.php Version 1
  * Shawn Fradet
  * CST-236
  * 2/28/2021

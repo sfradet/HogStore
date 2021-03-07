@@ -19,7 +19,8 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link type="text/css" rel="stylesheet" href="\HogStore\utility\simplePagination.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 
     <title>Hog Store</title>
@@ -36,21 +37,39 @@ session_start();
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mr-auto">
                 <?php
                 if ($_SESSION['principal'] == true) : ?>
                     <li class="nav-item">
-                        <a href="\HogStore\utility\logout.php" class="nav-link">Logout</a>
+                        <a href="\HogStore\presentation\handlers\productHandler.php" class="nav-link">Products</a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a href="\HogStore\presentation\views\login.php" class="nav-link">Login</a>
+                        <a href="\HogStore\presentation\views\_login.php" class="nav-link">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href="\HogStore\presentation\views\register.php" class="nav-link">Register</a>
+                        <a href="\HogStore\presentation\views\_register.php" class="nav-link">Register</a>
                     </li>
                 <?php endif; ?>
             </ul>
+            <div class="dropdown show">
+                <?php
+                if ($_SESSION['principal'] == true) : ?>
+                    <a class="nav-link dropdown-toggle text-white px-0" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown"><?php echo $_SESSION['username'] ?>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="\HogStore\utility\logout.php">Logout</a>
+                    </div>
+                <?php else : ?>
+                    <a class="nav-link dropdown-toggle text-white px-0" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown">Not Logged In
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="\HogStore\presentation\views\_login.php">Login</a>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </nav>

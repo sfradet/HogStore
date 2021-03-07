@@ -23,7 +23,7 @@
         <?php if (!empty($_POST['id'])) { ?>
             <div class="col-lg-8 offset-lg-2">
                 <div class="card mb-3">
-                    <img class="card-img-top" src="../images/screw.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="../images/<?php echo $productArray[0]->getImageFileName() ?>" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $productArray[0]->getName() ?></h5>
                         <p class="card-text"><?php echo $productArray[0]->getDescription() ?></p>

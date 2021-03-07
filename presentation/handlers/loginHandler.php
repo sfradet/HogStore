@@ -21,7 +21,7 @@ $securityService = new SecurityService($username, $password);
 // Authenticate user
 $loggedIn = $securityService->authenticate();
 
-// If authenticated, set session data and return to index.php. If no authentication return to login.php
+// If authenticated, set session data and return to index.php. If no authentication return to _login.php
 if ($loggedIn)
 {
     $_SESSION['principal'] = true;
@@ -30,7 +30,7 @@ if ($loggedIn)
 }
 else {
     $_SESSION['principal'] = false;
-    header("Location: ../views/loginFail.php");
+    header("Location: ../views/_loginFail.php");
 }
 
 

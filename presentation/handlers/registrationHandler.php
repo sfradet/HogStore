@@ -27,11 +27,11 @@ if ($checkUsername)
 {
     $_SESSION['principal'] = false;
     $_SESSION['error_msg'] = "That username is already taken";
-    header("Location: ../views/registrationFail.php");
+    header("Location: ../views/_registrationFail.php");
 } elseif ($checkEmail){
     $_SESSION['principal'] = false;
     $_SESSION['error_msg'] = "That email is already registered";
-    header("Location: ../views/registrationFail.php");
+    header("Location: ../views/_registrationFail.php");
 } else {
     // Attempt to add user
     $loggedIn = $registrationService->addUser($newUser);
@@ -47,7 +47,7 @@ if ($checkUsername)
     else {
         // Display error page.
         $_SESSION['principal'] = false;
-        header("Location: ../views/loginFail.php");
+        header("Location: ../views/_loginFail.php");
     }
 }
 

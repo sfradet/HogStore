@@ -26,7 +26,7 @@ class ProductDataService
 
             while ($product = $result->fetch_assoc())
             {
-                $returnedProduct = new Product($product["PROD_ID"], $product["PROD_NAME"], $product["PROD_COST"], $product["PROD_DESCRIPTION"], $product["PROD_COUNT"]);
+                $returnedProduct = new Product($product["PROD_ID"], $product["PROD_NAME"], $product["PROD_COST"], $product["PROD_DESCRIPTION"], $product["PROD_COUNT"], $product["PROD_IMAGE"]);
                 //echo $product["PROD_NAME"] . "<br>";
                 array_push($product_array, $returnedProduct);
             }
@@ -61,7 +61,7 @@ class ProductDataService
 
             while ($product = $result->fetch_assoc())
             {
-                $returnedProduct = new Product($product["PROD_ID"], $product["PROD_NAME"], $product["PROD_COST"], $product["PROD_DESCRIPTION"], $product["PROD_COUNT"]);
+                $returnedProduct = new Product($product["PROD_ID"], $product["PROD_NAME"], $product["PROD_COST"], $product["PROD_DESCRIPTION"], $product["PROD_COUNT"], $product["PROD_IMAGE"]);
                 //echo $product["PROD_NAME"] . "<br>";
                 array_push($product_array, $returnedProduct);
             }
@@ -96,7 +96,7 @@ class ProductDataService
 
             while ($product = $result->fetch_assoc())
             {
-                $returnedProduct = new Product($product["PROD_ID"], $product["PROD_NAME"], $product["PROD_COST"], $product["PROD_DESCRIPTION"], $product["PROD_COUNT"]);
+                $returnedProduct = new Product($product["PROD_ID"], $product["PROD_NAME"], $product["PROD_COST"], $product["PROD_DESCRIPTION"], $product["PROD_COUNT"], $product["PROD_IMAGE"]);
                 //echo $product["PROD_NAME"] . "<br>";
                 array_push($product_array, $returnedProduct);
             }

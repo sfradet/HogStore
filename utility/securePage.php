@@ -7,8 +7,7 @@
  * 2/28/2021
  * This file is for checking if user is logged in to secure the page.
  */
-require_once "_header.php";
 
 if (isset($_SESSION['principal']) == false || $_SESSION['principal'] == false || $_SESSION['principal'] == null) {
-    header("Location: login.php");
+    header("Location: \HogStore\presentation\\views\_login.php");
 }
