@@ -1,13 +1,19 @@
 <?php
-
-
+/*
+ * Hog Store Website Version 2
+ * User.php Version 1
+ * Shawn Fradet
+ * CST-236
+ * 3/7/2021
+ * This class represents a User model.
+ */
 class User
 {
-    private $firstname;
-    private $lastname;
-    private $email;
-    private $username;
-    private $password;
+    private $firstname; // User first name
+    private $lastname; // User last name
+    private $email; // User email address
+    private $username; // User's username
+    private $password; // Password
 
     public function __construct($firstname, $lastname, $username, $email, $password)
     {
@@ -18,6 +24,7 @@ class User
         $this->password = $password;
     }
 
+    // Getter and Setters
     /**
      * @return mixed
      */

@@ -1,13 +1,12 @@
 <?php
 /*
- * Hog Store Website Version 1
+ * Hog Store Website Version 2
  * RegistrationService.php Version 1
  * Shawn Fradet
  * CST-236
  * 2/28/2021
- * This class is for handling registration actions.
+ * This class is for handling registration actions with a database.
  */
-
 
 class RegistrationService
 {

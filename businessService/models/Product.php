@@ -1,14 +1,21 @@
 <?php
-
+/*
+ * Hog Store Website Version 2
+ * Product.php Version 1
+ * Shawn Fradet
+ * CST-236
+ * 3/7/2021
+ * This class represents a Product model..
+ */
 
 class Product
 {
-    private $name;
-    private $cost;
-    private $description;
-    private $count;
-    private $imageFileName;
-    private $id;
+    private $name; // Products Name
+    private $cost; // Products Cost
+    private $description; // Product Description
+    private $count; // Current Stock
+    private $imageFileName; // File name 'filenameexample.jpg'
+    private $id; // Database id
 
     public function __construct($id, $name, $cost, $description, $count, $imageFileName)
     {
@@ -20,11 +27,13 @@ class Product
         $this->imageFileName = $imageFileName;
     }
 
+    // Function to get the cost as a currency string
     public function getCostAsString()
     {
         return number_format($this->getCost(), 2, '.', ',');
     }
 
+    // Getter and Setters
     /**
      * @return mixed
      */

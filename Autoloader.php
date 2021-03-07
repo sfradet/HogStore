@@ -1,6 +1,6 @@
 <?php
 /*
- * Hog Store Website Version 1
+ * Hog Store Website Version 2
  * Autoloader.php Version 1
  * Shawn Fradet
  * CST-236
