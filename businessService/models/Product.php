@@ -20,6 +20,11 @@ class Product
         $this->imageFileName = $imageFileName;
     }
 
+    public function getCostAsString()
+    {
+        return number_format($this->getCost(), 2, '.', ',');
+    }
+
     /**
      * @return mixed
      */
