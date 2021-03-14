@@ -8,6 +8,6 @@
  * This file is for checking if user is logged in to secure the page.
  */
 
-if (isset($_SESSION['principal']) == false || $_SESSION['principal'] == false || $_SESSION['principal'] == null) {
-    header("Location: \HogStore\presentation\\views\_login.php");
+if (isset($_SESSION['role']) == false || $_SESSION['role'] != 2 || $_SESSION['principal'] == null) {
+    header("Location: \HogStore\index.php");
 }

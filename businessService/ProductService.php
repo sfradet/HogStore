@@ -30,6 +30,27 @@ class ProductService
     {
         $productDataService = new ProductDataService();
 
-        return $productDataService->getProductsById($id);
+        return $productDataService->getProductById($id);
+    }
+
+    public function addProduct($product)
+    {
+        $productDataService = new ProductDataService();
+
+        return $productDataService->addProduct($product);
+    }
+
+    public function deleteProductById($id)
+    {
+        $productDataService = new ProductDataService();
+
+        return $productDataService->deleteProductById($id);
+    }
+
+    public function updateProduct($product)
+    {
+        $productDataService = new ProductDataService();
+
+        return $productDataService->updateProduct($product);
     }
 }

@@ -45,7 +45,7 @@ class ProductDataService
     }
 
     // Product to search the database by a id. Returns array.
-    function getProductsById($id)
+    function getProductById($id)
     {
         // Connect to database
         $db = new Database();
@@ -74,7 +74,7 @@ class ProductDataService
                 array_push($product_array, $returnedProduct);
             }
 
-            return $product_array;
+            return $product_array[0];
         }
     }
 
@@ -110,6 +110,83 @@ class ProductDataService
             }
 
             return $product_array;
+        }
+    }
+
+    // Add user to database
+    function addProduct($product)
+    {
+        $db = new Database();
+
+        $sql_query = "INSERT INTO product (PROD_NAME, PROD_DESCRIPTION, PROD_COUNT, PROD_COST, PROD_IMAGE) VALUES (?, ?, ?, ?, ?)";
+
+        $connection = $db->getConnection();
+
+        $stmt = $connection->prepare($sql_query);
+
+        $name = $product->getName();
+        $description = $product->getDescription();
+        $count = $product->getCount();
+        $cost = $product->getCost();
+        $image = $product->getImageFileName();
+
+        $stmt->bind_param("ssids", $name, $description, $count, $cost, $image);
+
+        if ($stmt->execute())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Update user data in database
+    function updateProduct($product)
+    {
+        $db = new Database();
+
+        $sql_query = "UPDATE product SET PROD_NAME=?, PROD_DESCRIPTION=?, PROD_COST=?, PROD_COUNT=?, PROD_IMAGE=? WHERE PROD_ID=?";
+
+        $connection = $db->getConnection();
+
+        $stmt = $connection->prepare($sql_query);
+
+        $name = $product->getName();
+        $description = $product->getDescription();
+        $count = $product->getCount();
+        $cost = $product->getCost();
+        $image = $product->getImageFileName();
+        $id = $product->getId();
+
+        $stmt->bind_param("ssdisi", $name, $description, $cost, $count, $image, $id);
+
+        if ($stmt->execute())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Delete a user by their id
+    function deleteProductById($id)
+    {
+        // Connect to database
+        $db = new Database();
+        $connection = $db->getConnection();
+
+        // Prepare search string
+        $sql_query = "DELETE FROM product WHERE PROD_ID=?";
+        $stmt = $connection->prepare($sql_query);
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute())
+        {
+            return true;
+        } else {
+            return false;
         }
     }
 }

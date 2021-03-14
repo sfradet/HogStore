@@ -25,14 +25,14 @@ class SecurityService
     {
         $userDataService = new UserDataService();
 
-        $loggedIn = $userDataService->authenticateLogin($this->username, $this->password);
-
+        return $userDataService->authenticateLogin($this->username, $this->password);
+        /*
         if ($loggedIn)
         {
             return true;
         }
         else {
             return false;
-        }
+        }*/
     }
 }

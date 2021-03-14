@@ -19,9 +19,10 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link type="text/css" rel="stylesheet" href="\HogStore\utility\simplePagination.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>Hog Store</title>
 </head>
@@ -43,7 +44,23 @@ session_start();
                     <li class="nav-item">
                         <a href="\HogStore\presentation\handlers\productHandler.php" class="nav-link">Products</a>
                     </li>
+                <?php if ($_SESSION['role'] == 2) : ?>
+                    <div class="dropdown show">
+                        <a class="nav-link dropdown-toggle text-white-50" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown">Administrator
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="\HogStore\presentation\handlers\userHandler.php">Manage Users</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="\HogStore\presentation\handlers\addProductHandler.php">Add Product</a>
+                            <a class="dropdown-item" href="\HogStore\presentation\handlers\productAdminHandler.php">Manage Products</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <?php else : ?>
+                    <li class="nav-item">
+                        <a href="\HogStore\presentation\handlers\productHandler.php" class="nav-link">Products</a>
+                    </li>
                     <li class="nav-item">
                         <a href="\HogStore\presentation\views\_login.php" class="nav-link">Login</a>
                     </li>

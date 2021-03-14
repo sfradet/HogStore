@@ -41,6 +41,7 @@ if ($checkUsername)
         // Save success to Session
         $_SESSION['principal'] = true;
         $_SESSION['username'] = $_POST['Username'];
+        $_SESSION['role'] = 1;
         header("Location: ../../index.php");
 
     }

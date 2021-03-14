@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Hog Store Website Version 2
  * User.php Version 1
@@ -7,6 +8,7 @@
  * 3/7/2021
  * This class represents a User model.
  */
+
 class User
 {
     private $firstname; // User first name
@@ -14,6 +16,8 @@ class User
     private $email; // User email address
     private $username; // User's username
     private $password; // Password
+    private $role = 1; // User Role
+    private $id; // Database id
 
     public function __construct($firstname, $lastname, $username, $email, $password)
     {
@@ -25,6 +29,7 @@ class User
     }
 
     // Getter and Setters
+
     /**
      * @return mixed
      */
@@ -105,6 +110,35 @@ class User
         $this->password = $password;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
 }

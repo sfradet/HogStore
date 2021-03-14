@@ -40,15 +40,15 @@
         <?php if (!empty($_POST['id'])) { ?>
             <div class="col-lg-8 offset-lg-2">
                 <div class="card mb-3">
-                    <img class="card-img-top" src="../images/<?php echo $productArray[0]->getImageFileName() ?>"
+                    <img class="card-img-top" src="../images/<?php echo $productArray->getImageFileName() ?>"
                          alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $productArray[0]->getName() ?></h5>
-                        <p class="card-text"><?php echo $productArray[0]->getDescription() ?></p>
+                        <h5 class="card-title"><?php echo $productArray->getName() ?></h5>
+                        <p class="card-text"><?php echo $productArray->getDescription() ?></p>
                         <hr style="border: 1px solid;">
                         <p class="card-text d-flex space-between">
-                            <span>Cost Per Unit: $<?php echo $productArray[0]->getCostAsString() ?></span>
-                            <span class="ml-auto">Current Stock: <?php echo $productArray[0]->getCount() ?></span>
+                            <span>Cost Per Unit: $<?php echo $productArray->getCostAsString() ?></span>
+                            <span class="ml-auto">Current Stock: <?php echo $productArray->getCount() ?></span>
                         </p>
                     </div>
                 </div>

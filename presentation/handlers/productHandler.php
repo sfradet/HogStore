@@ -10,7 +10,6 @@
 
 require_once "../views/_header.php";
 require_once "../../Autoloader.php";
-require_once "../../utility/securePage.php";
 
 $productService = new ProductService();
 

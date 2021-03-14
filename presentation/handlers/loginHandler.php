@@ -19,13 +19,14 @@ $password = $_POST['Password'];
 $securityService = new SecurityService($username, $password);
 
 // Authenticate user
-$loggedIn = $securityService->authenticate();
+$user = $securityService->authenticate();
 
 // If authenticated, set session data and return to index.php. If no authentication return to _login.php
-if ($loggedIn)
+if (!$user == null)
 {
     $_SESSION['principal'] = true;
     $_SESSION['username'] = $username;
+    $_SESSION['role'] = $user->getRole();
     header("Location: ../../index.php");
 }
 else {
