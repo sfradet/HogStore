@@ -1,6 +1,6 @@
 <?php
 /*
- * Hog Store Website Version 2
+ * Hog Store Website Version 3
  * Database.php Version 1
  * Shawn Fradet
  * CST-236

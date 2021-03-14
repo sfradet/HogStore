@@ -1,6 +1,6 @@
 <?php
 /*
- * Hog Store Website Version 2
+ * Hog Store Website Version 3
  * SecurityService.php Version 1
  * Shawn Fradet
  * CST-236
@@ -26,13 +26,5 @@ class SecurityService
         $userDataService = new UserDataService();
 
         return $userDataService->authenticateLogin($this->username, $this->password);
-        /*
-        if ($loggedIn)
-        {
-            return true;
-        }
-        else {
-            return false;
-        }*/
     }
 }

@@ -1,10 +1,10 @@
 <?php
 /*
- * Hog Store Website Version 2
- * ProductDataService.php Version 1
+ * Hog Store Website Version 3
+ * ProductDataService.php Version 2
  * Shawn Fradet
  * CST-236
- * 3/7/2021
+ * 3/14/2021
  * This class is used for accessing the database and getting product information.
  */
 require_once "Database.php";
@@ -44,7 +44,7 @@ class ProductDataService
         }
     }
 
-    // Product to search the database by a id. Returns array.
+    // Product to search the database by a id. Returns Product.
     function getProductById($id)
     {
         // Connect to database
@@ -113,15 +113,15 @@ class ProductDataService
         }
     }
 
-    // Add user to database
+    // Add Product to the database
     function addProduct($product)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "INSERT INTO product (PROD_NAME, PROD_DESCRIPTION, PROD_COUNT, PROD_COST, PROD_IMAGE) VALUES (?, ?, ?, ?, ?)";
-
         $connection = $db->getConnection();
 
+        // Prepare SQL String
+        $sql_query = "INSERT INTO product (PROD_NAME, PROD_DESCRIPTION, PROD_COUNT, PROD_COST, PROD_IMAGE) VALUES (?, ?, ?, ?, ?)";
         $stmt = $connection->prepare($sql_query);
 
         $name = $product->getName();
@@ -132,6 +132,7 @@ class ProductDataService
 
         $stmt->bind_param("ssids", $name, $description, $count, $cost, $image);
 
+        // Execute statement return boolean.
         if ($stmt->execute())
         {
             return true;
@@ -141,14 +142,15 @@ class ProductDataService
         }
     }
 
-    // Update user data in database
+    // Update Product data in database
     function updateProduct($product)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "UPDATE product SET PROD_NAME=?, PROD_DESCRIPTION=?, PROD_COST=?, PROD_COUNT=?, PROD_IMAGE=? WHERE PROD_ID=?";
-
         $connection = $db->getConnection();
+
+        // Prepare SQL string
+        $sql_query = "UPDATE product SET PROD_NAME=?, PROD_DESCRIPTION=?, PROD_COST=?, PROD_COUNT=?, PROD_IMAGE=? WHERE PROD_ID=?";
 
         $stmt = $connection->prepare($sql_query);
 
@@ -161,6 +163,7 @@ class ProductDataService
 
         $stmt->bind_param("ssdisi", $name, $description, $cost, $count, $image, $id);
 
+        // Execute statement return boolean.
         if ($stmt->execute())
         {
             return true;
@@ -170,7 +173,7 @@ class ProductDataService
         }
     }
 
-    // Delete a user by their id
+    // Delete a Product by their id
     function deleteProductById($id)
     {
         // Connect to database
@@ -182,6 +185,7 @@ class ProductDataService
         $stmt = $connection->prepare($sql_query);
         $stmt->bind_param("i", $id);
 
+        // Execute statement and return boolean.
         if ($stmt->execute())
         {
             return true;

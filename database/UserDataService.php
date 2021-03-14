@@ -11,6 +11,7 @@ require_once "Database.php";
 
 class UserDataService
 {
+    // Method for returning all users in an array.
     function getAllUsers()
     {
         // Connect to database
@@ -48,11 +49,12 @@ class UserDataService
     // Update user data in database
     function updateUserById($newUser)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "UPDATE users SET first_name=?, last_name=?, email=?, password=?, username=?, ROLE=? WHERE id=?";
-
         $connection = $db->getConnection();
+
+        // Prepare SQL string
+        $sql_query = "UPDATE users SET first_name=?, last_name=?, email=?, password=?, username=?, ROLE=? WHERE id=?";
 
         $stmt = $connection->prepare($sql_query);
 
@@ -66,6 +68,7 @@ class UserDataService
 
         $stmt->bind_param("sssssii", $firstname, $lastname, $email, $password, $username, $role, $id);
 
+        // Execute statement and return boolean.
         if ($stmt->execute())
         {
             return true;
@@ -78,18 +81,17 @@ class UserDataService
     // Check database for login credentials
     function authenticateLogin($username, $password)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "SELECT * FROM users WHERE username LIKE ?";
-
         $connection = $db->getConnection();
 
+        // Prepare SQL String
+        $sql_query = "SELECT * FROM users WHERE username LIKE ?";
         $stmt = $connection->prepare($sql_query);
-
         $stmt->bind_param("s", $username);
 
+        // Execute statement and get results.
         $stmt->execute();
-
         $result = $stmt->get_result();
 
         // Set results to array. If no results return null.
@@ -115,43 +117,32 @@ class UserDataService
             // Check password hash
             $passwordCheck = password_verify($password, $password_hash);
 
+            // Return user if password check true, else return null.
             if ($passwordCheck) {
                 return $user_array[0];
             } else {
                 return null;
             }
-
-            //return $user_array[0];
         }
-        // Get results as a associative array
-        //$row = $result->fetch_assoc();
-
-
-        /* Return results
-        if ($passwordCheck) {
-            return true;
-        } else {
-            return false;
-        }*/
     }
 
     // Find user by username
     function findUsername($username)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "SELECT * FROM users WHERE username LIKE ?";
-
         $connection = $db->getConnection();
 
+        // Prepare SQL String
+        $sql_query = "SELECT * FROM users WHERE username LIKE ?";
         $stmt = $connection->prepare($sql_query);
-
         $stmt->bind_param("s", $username);
 
+        // Execute and get results
         $stmt->execute();
-
         $result = $stmt->get_result();
 
+        // Check results and return boolean.
         if (!$result || $result->num_rows == 0){
             return false;
         } else {
@@ -179,6 +170,7 @@ class UserDataService
         }
     }
 
+    // Get user from database by id
     function getUserById($id)
     {
         // Connect to database
@@ -217,20 +209,20 @@ class UserDataService
     // Find user by email
     function findEmail($email)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "SELECT * FROM users WHERE email LIKE ?";
-
         $connection = $db->getConnection();
 
+        // Prepare SQL string
+        $sql_query = "SELECT * FROM users WHERE email LIKE ?";
         $stmt = $connection->prepare($sql_query);
-
         $stmt->bind_param("s", $email);
 
+        // Execute query and return results
         $stmt->execute();
-
         $result = $stmt->get_result();
 
+        // Check results. Return true for results and null for none.
         if (!$result || $result->num_rows == 0){
             return false;
         } else {
@@ -241,12 +233,12 @@ class UserDataService
     // Add user to database
     function registerUser($newUser)
     {
+        // Connect to database
         $db = new Database();
-
-        $sql_query = "INSERT INTO users (first_name, last_name, email, password, username, ROLE) VALUES (?, ?, ?, ?, ?, ?)";
-
         $connection = $db->getConnection();
 
+        // Preapre SQL string
+        $sql_query = "INSERT INTO users (first_name, last_name, email, password, username, ROLE) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $connection->prepare($sql_query);
 
         $firstname = $newUser->getFirstname();
@@ -258,6 +250,7 @@ class UserDataService
 
         $stmt->bind_param("sssssi", $firstname, $lastname, $email, $password, $username, $role);
 
+        // Execute and return boolean
         if ($stmt->execute())
         {
             return true;

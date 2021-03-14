@@ -1,11 +1,11 @@
 <?php
 
 /*
- * Hog Store Website Version 2
- * User.php Version 1
+ * Hog Store Website Version 3
+ * User.php Version 2
  * Shawn Fradet
  * CST-236
- * 3/7/2021
+ * 3/14/2021
  * This class represents a User model.
  */
 

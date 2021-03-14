@@ -1,8 +1,16 @@
 <?php
-
+/*
+ * Hog Store Website Version 3
+ * UserService.php Version 1
+ * Shawn Fradet
+ * CST-236
+ * 3/14/2021
+ * This class is a service that provides access to Users in the database.
+ */
 
 class UserService
 {
+    // Method for returning an array of all users in database.
     public function getAllUsers()
     {
         $userDataService = new UserDataService();
@@ -10,6 +18,7 @@ class UserService
         return $userDataService->getAllUsers();
     }
 
+    // Method for finding a user in database by id. Takes $id as argument returns User.
     public function getUserById($id)
     {
         $userDataService = new UserDataService();
@@ -17,6 +26,7 @@ class UserService
         return $userDataService->getUserById($id);
     }
 
+    // Method for updating a user in the database. Takes user as argument and returns boolean.
     public function updateUser($user)
     {
         $userDataService = new UserDataService();
@@ -24,6 +34,7 @@ class UserService
         return $userDataService->updateUserById($user);
     }
 
+    // Method for deleting a user from the database by its id. Takes id as argument and returns boolean.
     public function deleteUser($id)
     {
         $userDataService = new UserDataService();

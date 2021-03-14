@@ -1,6 +1,6 @@
 <?php
 /*
- * Hog Store Website Version 2
+ * Hog Store Website Version 3
  * registrationHanlder.php Version 1
  * Shawn Fradet
  * CST-236
@@ -10,7 +10,7 @@
 require_once "../views/_header.php";
 require_once "../../Autoloader.php";
 
-// Has password
+// Hash password
 $password = password_hash(trim($_POST['Password']), PASSWORD_DEFAULT);
 
 $newUser = new User($_POST['Firstname'], $_POST['Lastname'], $_POST['Username'], $_POST['Email'], $password);
