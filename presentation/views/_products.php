@@ -77,7 +77,12 @@
                                 <form class="form-inline justify-content-center" action="../handlers/productHandler.php"
                                       method="post">
                                     <input type="hidden" name="id" value="<?php echo $productArray[$x]->getId() ?>">
-                                    <input class="btn btn-sm btn-info" type="submit" value="Details">
+                                    <input class="btn btn-sm btn-info my-1" style="width: 150px;" type="submit" value="Details">
+                                </form>
+                                <form class="form-inline justify-content-center" action="../handlers/addToCartHandler.php"
+                                      method="post">
+                                    <input type="hidden" name="id" value="<?php echo $productArray[$x]->getId() ?>">
+                                    <input class="btn btn-sm btn-info my-1" style="width: 150px;" type="submit" value="Add to Cart">
                                 </form>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 <?php
 /*
- * Hog Store Website Version 3
+ * Hog Store Website Version 4
  * ProductDataService.php Version 2
  * Shawn Fradet
  * CST-236
@@ -138,6 +138,7 @@ class ProductDataService
             return true;
         }
         else {
+            echo "Whoops";
             return false;
         }
     }

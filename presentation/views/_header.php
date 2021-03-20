@@ -8,7 +8,7 @@
  * This file contains information to place at the top of the file.
  * It includes a session start and navbar
  */
-
+include_once "../../Autoloader.php";
 session_start();
 ?>
 
@@ -69,6 +69,18 @@ session_start();
                     </li>
                 <?php endif; ?>
             </ul>
+            <button class="btn btn-sm my-1 mr-2 btn-outline-info" style="width: 85px;" onclick="location.href='cartHandler.php'">
+                <i class="bi bi-cart"></i>
+                <?php if($_SESSION['principal'] == true)
+                {
+                    $cart = $_SESSION['cart'];
+                    if ($cart->cartTotalItems() > 0)
+                    {
+                        echo "<span class='badge badge-dark ml-1'>" . $cart->cartTotalItems() . "</span>";
+                    }
+                }
+                ?>
+            </button>
             <div class="dropdown show">
                 <?php
                 if ($_SESSION['principal'] == true) : ?>

@@ -27,6 +27,7 @@ if (!$user == null)
     $_SESSION['principal'] = true;
     $_SESSION['username'] = $username;
     $_SESSION['role'] = $user->getRole();
+    $_SESSION['cart'] = new Cart($user->getId());
     header("Location: ../../index.php");
 }
 else {

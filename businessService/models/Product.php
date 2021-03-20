@@ -1,10 +1,10 @@
 <?php
 /*
- * Hog Store Website Version 3
+ * Hog Store Website Version 4
  * Product.php Version 1
  * Shawn Fradet
  * CST-236
- * 3/14/2021
+ * 3/20/2021
  * This class represents a Product model..
  */
 
