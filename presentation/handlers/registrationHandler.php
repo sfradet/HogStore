@@ -38,12 +38,18 @@ if ($checkUsername)
 
     if ($loggedIn)
     {
+        // Create security service
+        $securityService = new SecurityService($_POST['Username'], $_POST['Password']);
+
+        // Authenticate user
+        $user = $securityService->authenticate();
+
         // Save success to Session
         $_SESSION['principal'] = true;
         $_SESSION['username'] = $_POST['Username'];
-        $_SESSION['role'] = 1;
+        $_SESSION['role'] = $user->getRole();
+        $_SESSION['cart'] = new Cart($user->getId());
         header("Location: ../../index.php");
-
     }
     else {
         // Display error page.

@@ -7,6 +7,7 @@
  * 2/28/2021
  * This class is for actions related to users and the database.
  */
+
 require_once "Database.php";
 
 class UserDataService

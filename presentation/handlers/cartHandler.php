@@ -1,10 +1,10 @@
 <?php
 /*
  * Hog Store Website Version 4
- * cartHandler.php Version 1
+ * cartHandler.php Version 2
  * Shawn Fradet
  * CST-236
- * 3/20/2021
+ * 3/25/2021
  * This class is used for handling the shopping cart page and actions.
  */
 require_once "../views/_header.php";
@@ -41,21 +41,41 @@ elseif ($_POST['route'] == 'update')
     header("Location: \HogStore\presentation\handlers\cartHandler.php");
 }
 // User is trying to checkout.
-else
+elseif ($_POST['route'] == 'checkout')
 {
-    // Get new order id
-    $orderId = $orderService->createOrder($cart->getUserid());
+    include("../views/_payProduct.php");
+}
+// If user is trying to complete payment
+else{
 
-    // Step through cart and add each item to orderdetails table in database.
-    foreach ($cart->getItems() as $productID => $qty)
-    {
-        $product = $productService->getProductByID($productID);
-        $orderService->addOrderItem($orderId, $productID, $qty, $product->getCost());
-    }
+    // Get credit card data from POST
+    $ccName = clean_input($_POST['NameCard']);
+    $ccNumber = clean_input($_POST['CCNumber']);
+    $expMonth = clean_input($_POST['Month']);
+    $expYear = clean_input($_POST['Year']);
+    $cvv = clean_input($_POST['CVV']);
 
-    // Display message and clear cart.
-    echo "<h2 class='text-center mt-5'>Thank you for your purchase!</h2>";
+    // Create new CreditCard
+    $cc = new CreditCard($ccName, $ccNumber, $expMonth, $expYear, $cvv, $cart->getUserid());
+
+    // Create new Order and get ID
+    $orderID = $orderService->processOrder($cart, $cc);
+    // Get total cart cost
+    $orderTotal = $cart->getTotalPrice();
+    // Clear cart
     $cart->clearCart();
+    // Get order details from database.
+    $d_array = $orderService->getOrderDetails($orderID);
+
+    include("../views/_orderReceipt.php");
 }
 
 include("../views/_footer.php");
+
+// Function for cleaning user input against SQL injection
+function clean_input($inputData) {
+    $inputData = trim($inputData);
+    $inputData = stripslashes($inputData);
+    $inputData = htmlspecialchars($inputData);
+    return $inputData;
+}

@@ -88,8 +88,8 @@
                 <h5 class="text-secondary mx-3 mx-sm-0"><span>Total Cost:<span
                                 style="float: right;">$<?php echo number_format($cart->getTotalPrice(), 2, '.', ','); ?></span>
                 </h5>
-                <input type="hidden" name="route" value="pay">
-                <input type="submit" value="Pay Now" class="btn btn-info btn-block btn-lg my-5">
+                <input type="hidden" name="route" value="checkout">
+                <input type="submit" value="Checkout" class="btn btn-info btn-block btn-lg my-5">
             </form>
         </div>
     </div>
