@@ -23,7 +23,8 @@ class OrderDataService
     function getOrdersByID($orderID)
     {
         // Prepare search string
-        $sql_query = "SELECT * FROM orderdetails WHERE ORDER_ID=?";
+        //$sql_query = "SELECT * FROM orderdetails WHERE ORDER_ID=?";
+        $sql_query = "SELECT * FROM orderdetails INNER JOIN orders ON orders.ORDER_ID=orderdetails.ORDER_ID WHERE orderdetails.ORDER_ID=?";
         $stmt = $this->connection->prepare($sql_query);
         $stmt->bind_param("i", $orderID);
 
@@ -40,7 +41,7 @@ class OrderDataService
 
             while ($order = $result->fetch_assoc())
             {
-                $returnedDetails = new OrderDetails($order["PRODUCT_ID"], $order["QUANTITY"], $order["CURRENTPRICE"]);
+                $returnedDetails = new OrderDetails($order["PRODUCT_ID"], $order["QUANTITY"], $order["CURRENTPRICE"], $order['ORDER_ID'], $order['DATE']);
 
                 array_push($order_array, $returnedDetails);
             }
