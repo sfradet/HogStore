@@ -54,7 +54,7 @@ class OrderDataService
     function getOrdersByDate($date1, $date2)
     {
         // Prepare search string
-        $sql_query = "SELECT * FROM orderdetails INNER JOIN orders ON orders.ORDER_ID=orderdetails.ORDER_ID WHERE DATE BETWEEN ? AND ? ORDER BY orderdetails.PRODUCT_ID, orderdetails.QUANTITY DESC";
+        $sql_query = "SELECT * FROM orderdetails INNER JOIN orders ON orders.ORDER_ID=orderdetails.ORDER_ID WHERE cast(DATE as date) BETWEEN ? AND ? ORDER BY orderdetails.PRODUCT_ID, orderdetails.QUANTITY DESC";
         $stmt = $this->connection->prepare($sql_query);
         $stmt->bind_param("ss", $date1, $date2);
 
