@@ -9,7 +9,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table" id="table_id">
+        <table class="table">
             <thead class="bg-info text-white">
             <tr>
                 <th>Item</th>
