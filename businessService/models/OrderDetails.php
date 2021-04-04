@@ -1,24 +1,34 @@
 <?php
 /*
- * Hog Store Website Version 4
- * OrderDetails.php Version 1
+ * Hog Store Website Version 6
+ * OrderDetails.php Version 2
  * Shawn Fradet
  * CST-236
- * 3/25/2021
+ * f/4/2021
  * This class is used for holding order information retrieved from the database.
  */
-class OrderDetails
+class OrderDetails implements JsonSerializable
 {
     private $productID; // Product's ID
     private $quantity; // Quantity purchased
     private $cost; // Cost at purchase
+    private $orderID; // Associated Order ID
+    private $dateTime; // Order creation timestamp
 
-    // Constructor takes Product ID, Quantity, and Cost as arguments.
-    function __construct($productID, $quantity, $cost)
+    // Constructor takes Product ID, Quantity, Cost, Order ID, and Date/time as arguments.
+    function __construct($productID, $quantity, $cost, $orderID, $dateTime)
     {
         $this->productID = $productID;
         $this->quantity = $quantity;
         $this->cost = $cost;
+        $this->orderID = $orderID;
+        $this->dateTime = $dateTime;
+    }
+
+    // Function for converting class information to JSON format
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 
     // Getter and Setters
@@ -70,5 +80,35 @@ class OrderDetails
         $this->cost = $cost;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOrderID()
+    {
+        return $this->orderID;
+    }
 
+    /**
+     * @param mixed $orderID
+     */
+    public function setOrderID($orderID)
+    {
+        $this->orderID = $orderID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @param mixed $dateTime
+     */
+    public function setDateTime($dateTime)
+    {
+        $this->dateTime = $dateTime;
+    }
 }

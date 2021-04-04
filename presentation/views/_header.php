@@ -50,6 +50,8 @@ session_start();
                            data-toggle="dropdown">Administrator
                         </a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="\HogStore\presentation\views\_reportForm.php">Product Report</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="\HogStore\presentation\handlers\userHandler.php">Manage Users</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="\HogStore\presentation\handlers\addProductHandler.php">Add Product</a>

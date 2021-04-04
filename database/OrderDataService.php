@@ -1,10 +1,10 @@
 <?php
 /*
- * Hog Store Website Version 4
- * OrderDataService.php Version 1
+ * Hog Store Website Version 6
+ * OrderDataService.php Version 2
  * Shawn Fradet
  * CST-236
- * 3/20/2021
+ * 4/4/2021
  * This class is used for accessing the database to store and retrieve order information.
  */
 
@@ -19,6 +19,7 @@ class OrderDataService
         $this->connection = $connection;
     }
 
+    // Function for returning Order details associated with a order id
     function getOrdersByID($orderID)
     {
         // Prepare search string
@@ -40,6 +41,36 @@ class OrderDataService
             while ($order = $result->fetch_assoc())
             {
                 $returnedDetails = new OrderDetails($order["PRODUCT_ID"], $order["QUANTITY"], $order["CURRENTPRICE"]);
+
+                array_push($order_array, $returnedDetails);
+            }
+
+            return $order_array;
+        }
+    }
+
+    // Function for returning all orders and order details within a date range.
+    function getOrdersByDate($date1, $date2)
+    {
+        // Prepare search string
+        $sql_query = "SELECT * FROM orderdetails INNER JOIN orders ON orders.ORDER_ID=orderdetails.ORDER_ID WHERE DATE BETWEEN ? AND ? ORDER BY orderdetails.PRODUCT_ID, orderdetails.QUANTITY DESC";
+        $stmt = $this->connection->prepare($sql_query);
+        $stmt->bind_param("ss", $date1, $date2);
+
+        // Execute search and get results
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Set results to an array. If no results, return null
+        if ($result->num_rows == 0)
+        {
+            return 'None';
+        } else {
+            $order_array = array();
+
+            while ($order = $result->fetch_assoc())
+            {
+                $returnedDetails = new OrderDetails($order["PRODUCT_ID"], $order["QUANTITY"], $order["CURRENTPRICE"], $order['ORDER_ID'], $order['DATE']);
 
                 array_push($order_array, $returnedDetails);
             }
@@ -86,6 +117,7 @@ class OrderDataService
         }
     }
 
+    // Function for adding a credit acard to database
     function addCreditCard($creditCard)
     {
         // Get Credit Card information
