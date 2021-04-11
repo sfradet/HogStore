@@ -26,13 +26,9 @@
                 echo "<td class='text-right'>$" . number_format($details->getCost() * $details->getQuantity(), 2, '.', ',') . "</td>";
             } ?>
             </tbody>
-            <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><h5 class="text-right">Order Total: $<?php echo number_format($orderTotal, 2, '.', ',') ?></h5></td>
-            </tr>
-            </tfoot>
         </table>
+        <h5 class="text-right">Order Total: $<?php echo number_format($cartTotal, 2, '.', ',') ?></h5>
+        <h5 class="text-right">Order Discount: -$<?php echo number_format($orderDiscount, 2, '.', ',') ?></h5>
+        <h5 class="text-right">Payment Total: $<?php echo number_format($orderTotal, 2, '.', ',') ?></h5></h5>
     </div>
 </div>

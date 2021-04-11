@@ -82,11 +82,18 @@
         </div>
         <div class="col-12 col-lg-3 col-md-4">
             <h3 class="text-center my-5">Shopping Cart</h3>
-            <h5 class="text-muted mx-3 mx-sm-0"><span>Total Items:<span
-                            style="float: right;"><?php echo $cart->cartTotalItems(); ?></span></h5>
-            <h5 class="text-secondary mx-3 mx-sm-0"><span>Total Cost:<span
-                            style="float: right;">$<?php echo number_format($cart->getTotalPrice(), 2, '.', ','); ?></span>
+            <h5 class="text-muted mx-3 mx-sm-0"><span>Total Items:</span>
+                <span style="float: right;"><?php echo $cart->cartTotalItems(); ?></span>
             </h5>
+            <h5 class="text-secondary mx-3 mx-sm-0"><span>Total Cost:</span>
+                <span style="float: right;">$<?php echo number_format($cart->getTotalPrice(), 2, '.', ','); ?></span>
+            </h5>
+            <?php if($cart->getCouponID() > 0)
+                { ?>
+                    <h5 class="text-secondary mx-3 mx-sm-0"><span>Discount:</span>
+                        <span class="text-danger" style="float: right;">-$<?php echo number_format($cart->getDiscountAmt(), 2, '.', ','); ?></span>
+                    </h5>
+                <?php } ?>
             <div class="accordion my-4" id="accordionExample">
                 <div class="card">
                     <div class="card-header" id="headingOne">

@@ -122,6 +122,11 @@ else{
     $orderID = $orderService->processOrder($cart, $cc);
     // Get total cart cost
     $orderTotal = $cart->getTotalPrice();
+    // Get cart cost before discount
+    $cart->calcTotal();
+    $cartTotal = $cart->getTotalPrice();
+    // Get discount amount
+    $orderDiscount = $cart->getDiscountAmt();
     // Clear cart
     $cart->clearCart();
     // Get order details from database.

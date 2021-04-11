@@ -46,14 +46,15 @@ class Cart
     // Apply discount to cart
     public function addDiscount($discountPercent)
     {
-        $discount = $this->totalPrice * $discountPercent;
-        $this->totalPrice -= $discount;
+        $this->discountAmt = $this->totalPrice * $discountPercent;
+        $this->totalPrice -= $this->discountAmt;
     }
 
     // Remove discount from cart
     public function removeDiscount()
     {
         $this->couponID = 0;
+        $this->discountAmt = 0;
         $this->calcTotal();
     }
 
@@ -119,6 +120,7 @@ class Cart
         $this->subtotals = array();
         $this->totalPrice = 0;
         $this->couponID = 0;
+        $this->discountAmt = 0;
 
         $this->calcTotal();
     }
