@@ -14,6 +14,8 @@ class Cart
     private $items; // Array to hold requested items
     private $subtotals; // Array of subtotals for items in cart
     private $totalPrice; // Total price of everything in the cart
+    private $couponID; // ID of any applied coupons
+    private $discountAmt; // Coupon Discount Amount
 
     public function __construct($userid)
     {
@@ -21,6 +23,8 @@ class Cart
         $this->items = array();
         $this->subtotals = array();
         $this->totalPrice = 0;
+        $this->couponID = 0;
+        $this->discountAmt = 0;
     }
 
     // Add new item to cart by its productId
@@ -36,6 +40,20 @@ class Cart
             $this->items = $this->items + array($prodId => 1);
         }
 
+        $this->calcTotal();
+    }
+
+    // Apply discount to cart
+    public function addDiscount($discountPercent)
+    {
+        $discount = $this->totalPrice * $discountPercent;
+        $this->totalPrice -= $discount;
+    }
+
+    // Remove discount from cart
+    public function removeDiscount()
+    {
+        $this->couponID = 0;
         $this->calcTotal();
     }
 
@@ -71,6 +89,8 @@ class Cart
             unset($this->items[$prodId]);
         }
 
+        $this->couponID = 0;
+
         // Recalculate cart total cost
         $this->calcTotal();
     }
@@ -98,6 +118,7 @@ class Cart
         $this->items = array();
         $this->subtotals = array();
         $this->totalPrice = 0;
+        $this->couponID = 0;
 
         $this->calcTotal();
     }
@@ -166,4 +187,37 @@ class Cart
     {
         $this->totalPrice = $totalPrice;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCouponID()
+    {
+        return $this->couponID;
+    }
+
+    /**
+     * @param mixed $couponID
+     */
+    public function setCouponID($couponID)
+    {
+        $this->couponID = $couponID;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDiscountAmt()
+    {
+        return $this->discountAmt;
+    }
+
+    /**
+     * @param int $discountAmt
+     */
+    public function setDiscountAmt($discountAmt)
+    {
+        $this->discountAmt = $discountAmt;
+    }
+
 }

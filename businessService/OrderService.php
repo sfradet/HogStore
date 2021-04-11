@@ -24,6 +24,46 @@ class OrderService
         return $orderDataService->createNewOrder($userID);
     }
 
+    // Function to retrieve coupon by its code. Take coupon code as argument
+    function getCouponByCode($couponCode)
+    {
+        // Create database connection
+        $db = new Database();
+        $connection = $db->getConnection();
+
+        // Create OrderDataService with connection as argument
+        $orderDataService = new OrderDataService($connection);
+
+        return $orderDataService->getCouponByCode($couponCode);
+    }
+
+    // Function to retrieve coupon by its ID. Takes coupon ID as argument
+    function getCouponByID($couponID)
+    {
+        // Create database connection
+        $db = new Database();
+        $connection = $db->getConnection();
+
+        // Create OrderDataService with connection as argument
+        $orderDataService = new OrderDataService($connection);
+
+        return $orderDataService->getCouponByID($couponID);
+    }
+
+    // Function to check if coupon has already been used by user. Takes coupon ID and user ID as argument
+    function checkCouponUsage($couponID, $userID)
+    {
+        // Create database connection
+        $db = new Database();
+        $connection = $db->getConnection();
+
+        // Create OrderDataService with connection as argument
+        $orderDataService = new OrderDataService($connection);
+
+        // Get all Order Details associated with a Order ID. Returns Array of OrderDetails
+        return $orderDataService->checkCouponUsage($couponID, $userID);
+    }
+
     // Function to create a new Order Detail
     function getOrderDetails($orderID)
     {
@@ -87,6 +127,9 @@ class OrderService
 
         // Create new order with logged in User's ID and Credit Card. Save returned Order ID
         $orderID = $orderDataService->createNewOrder($cart->getUserid(), $creditCardID);
+
+        // Add coupon to redeemed coupon table
+        $redeemedCouponID = $orderDataService->addRedeemedCoupon($cart->getUserid(), $orderID, $cart->getCouponID());
 
         // Variable for checking if all order details were inserted correctly
         $passed = true;

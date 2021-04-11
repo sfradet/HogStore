@@ -71,7 +71,7 @@ session_start();
                     </li>
                 <?php endif; ?>
             </ul>
-            <button class="btn btn-sm my-1 mr-2 btn-outline-info" style="width: 85px;" onclick="location.href='cartHandler.php'">
+            <button class="btn btn-sm my-1 mr-2 btn-outline-info" style="width: 85px;" onclick="location.href='\\HogStore\\presentation\\handlers\\cartHandler.php'">
                 <i class="bi bi-cart"></i>
                 <?php if($_SESSION['principal'] == true)
                 {

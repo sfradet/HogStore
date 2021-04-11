@@ -33,20 +33,110 @@ class OrderDataService
         $result = $stmt->get_result();
 
         // Set results to an array. If no results, return null
-        if ($result->num_rows == 0)
-        {
+        if ($result->num_rows == 0) {
             return null;
         } else {
             $order_array = array();
 
-            while ($order = $result->fetch_assoc())
-            {
+            while ($order = $result->fetch_assoc()) {
                 $returnedDetails = new OrderDetails($order["PRODUCT_ID"], $order["QUANTITY"], $order["CURRENTPRICE"], $order['ORDER_ID'], $order['DATE']);
 
                 array_push($order_array, $returnedDetails);
             }
 
             return $order_array;
+        }
+    }
+
+    // Function to retrieve Coupon by its coupon code.
+    function getCouponByCode($couponCode)
+    {
+        // Prepare search string
+        $sql_query = "SELECT * FROM coupons WHERE COUPON_CODE = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $stmt->bind_param("s", $couponCode);
+
+        // Execute search and get results
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Set results to an array. If no results, return null
+        if ($result->num_rows == 0) {
+            return null;
+        } else {
+
+            $coupon = 0;
+
+            while ($coupons = $result->fetch_assoc()) {
+                $coupon = new Coupon($coupons["COUPON_ID"], $coupons["COUPON_CODE"], $coupons["COUPON_VALUE"], $coupons["EXP_DATE"]);
+            }
+
+            return $coupon;
+        }
+    }
+
+    // Function to get coupon by it's coupon ID
+    function getCouponByID($couponID)
+    {
+        // Prepare search string
+        $sql_query = "SELECT * FROM coupons WHERE COUPON_ID = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $stmt->bind_param("i", $couponID);
+
+        // Execute search and get results
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Set results to an array. If no results, return null
+        if ($result->num_rows == 0) {
+            return null;
+        } else {
+
+            $coupon = 0;
+
+            while ($coupons = $result->fetch_assoc())
+            {
+                $coupon = new Coupon($coupons["COUPON_ID"], $coupons["COUPON_CODE"], $coupons["COUPON_VALUE"], $coupons["EXP_DATE"]);
+            }
+
+            return $coupon;
+        }
+    }
+
+    // Function to add redeemed coupons to redeemed coupon table.
+    function addRedeemedCoupon($userID, $orderID, $couponID)
+    {
+        // Prepare SQL String
+        $sql_query = "INSERT INTO redeemed_coupon (COUPON_ID, USER_ID, ORDER_ID) VALUES (?, ?, ?)";
+        $stmt = $this->connection->prepare($sql_query);
+
+        $stmt->bind_param("iii", $couponID, $userID, $orderID);
+
+        // Execute statement return boolean.
+        if ($stmt->execute()) {
+            return $stmt->insert_id;
+        } else {
+            return false;
+        }
+    }
+
+    // Function to check for redeemed coupon by coupon ID and user ID
+    function checkCouponUsage($couponID, $userID)
+    {
+        // Prepare SQL String
+        $sql_query = "SELECT * FROM redeemed_coupon WHERE COUPON_ID = ? AND USER_ID = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $stmt->bind_param("ii", $couponID, $userID);
+
+        // Execute search and get results
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Execute statement return boolean.
+        if ($result->num_rows == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -63,14 +153,12 @@ class OrderDataService
         $result = $stmt->get_result();
 
         // Set results to an array. If no results, return null
-        if ($result->num_rows == 0)
-        {
+        if ($result->num_rows == 0) {
             return 'None';
         } else {
             $order_array = array();
 
-            while ($order = $result->fetch_assoc())
-            {
+            while ($order = $result->fetch_assoc()) {
                 $returnedDetails = new OrderDetails($order["PRODUCT_ID"], $order["QUANTITY"], $order["CURRENTPRICE"], $order['ORDER_ID'], $order['DATE']);
 
                 array_push($order_array, $returnedDetails);
@@ -90,11 +178,9 @@ class OrderDataService
         $stmt->bind_param("ii", $userId, $creditCardID);
 
         // Execute statement return boolean.
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             return $stmt->insert_id;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -109,11 +195,9 @@ class OrderDataService
         $stmt->bind_param("iiid", $orderId, $productId, $quantity, $price);
 
         // Execute statement return boolean.
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -136,11 +220,9 @@ class OrderDataService
         $stmt->bind_param("ssiiii", $ccName, $ccNumber, $ccYear, $ccMonth, $ccCVV, $userID);
 
         // Execute statement return ID.
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             return $stmt->insert_id;
-        }
-        else {
+        } else {
             return false;
         }
     }

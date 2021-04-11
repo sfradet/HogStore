@@ -13,20 +13,31 @@ require_once "../../Autoloader.php";
 $productService = new ProductService(); // Instance of Product service
 $orderService = new OrderService(); // Instance of Order service
 
+$_SESSION['error_msg_coupon'] = null;
+
 $cart = $_SESSION['cart']; // Get cart from Session
 
 // If user came from product page display cart
-if (empty($_POST['route']))
+if (empty($_POST['route']) || !isset($_POST['route']))
 {
-    // Check if cart is empty. If not, display items.
-    if ($cart->cartTotalItems() > 0)
+    // Check if cart exists. If not, display display message.
+    if (isset($cart))
     {
-        include_once "../views/_shoppingCart.php";
+        // If cart has items, display cart. Else display message.
+        if ($cart->cartTotalItems() > 0)
+        {
+            include_once "../views/_shoppingCart.php";
+        }
+        else
+        {
+            echo "<h2 class='text-center mt-5'>Your cart is empty.</h2>";
+        }
     }
     else
-    {
-        echo "<h2 class='text-center mt-5'>Your cart is empty</h2>";
+        {
+            echo "<h2 class='text-center mt-5'>You must login to access a cart.</h2>";
     }
+
 }
 // If user is trying to remove item update quantity to 0
 elseif ($_POST['route'] == 'remove')
@@ -44,6 +55,55 @@ elseif ($_POST['route'] == 'update')
 elseif ($_POST['route'] == 'checkout')
 {
     include("../views/_payProduct.php");
+}
+// Check if user is applying a coupon
+elseif ($_POST['route'] == 'CouponCode')
+{
+    // Get coupon code
+    $couponCode = clean_input($_POST['CouponCode']);
+
+    // Retrieve coupon from database by its code
+    $coupon = $orderService->getCouponByCOde($couponCode);
+
+    // Check if coupon was retrieved from database
+    if ($coupon != null)
+    {
+        // Check if coupon is expired
+        if (time() < strtotime($coupon->getCouponExpDate()))
+        {
+            // Check if user has already used coupon
+            if(!$orderService->checkCouponUsage($coupon->getCouponID(), $cart->getUserid()))
+            {
+                $cart->addDiscount($coupon->getCouponValue());
+                $cart->setCouponID($coupon->getCouponID());
+            }
+            // Set already redeemed message
+            else{
+                $_SESSION['error_msg_coupon'] = "*Already Used Coupon";
+            }
+        }
+        // Set expired message
+        else
+        {
+            $_SESSION['error_msg_coupon'] = "*Coupon Expired";
+        }
+    }
+    // Set invalid coupon error
+    else
+    {
+        $_SESSION['error_msg_coupon'] = "*Invalid Coupon Code";
+    }
+
+    include_once "../views/_shoppingCart.php";
+}
+elseif ($_POST['route'] == 'RemoveCoupon')
+{
+    $cart->removeDiscount();
+    include_once "../views/_shoppingCart.php";
+}
+elseif ($_POST['route'] == 'GiftCard')
+{
+    echo "In the gift card code";
 }
 // If user is trying to complete payment
 else{
